@@ -2,33 +2,24 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserModel } from 'src/domain/models/user.model';
-import { UserRepository } from 'src/domain/repositories/user.repository';
-import { UserEntity } from './entities/user-entity';
-import { UserImplementationRepositoryMapper } from './mappers/user-repository.mapper';
+import { ContactModel } from 'src/domain/models/contact/contact.model';
+import { ContactRepository } from 'src/domain/repositories/contact.repository';
+import { ContactEntity } from './entities/contact-entity';
+import { ContactImplementationRepositoryMapper } from './mappers/contact-repository.mapper';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserImplementationRepository extends UserRepository {
-    userMapper = new UserImplementationRepositoryMapper();
+export class NotificationImplementationRepository extends ContactRepository {
+    contactMapper = new ContactImplementationRepositoryMapper();
 
     constructor(private http: HttpClient) {
         super();
     }
 
-    login(params: {username: string, password: string}): Observable<UserModel> {
+    override getAllContacts(): Observable<ContactModel[]> {
         return this.http
-            .post<UserEntity>('https://example.com/login', {params})
-            .pipe(map(this.userMapper.mapFrom));
-    }
-    register(params: {phoneNum: string, password: string}): Observable<UserModel> {
-       return this.http
-            .post<UserEntity>('https://example.com/register', {params})
-            .pipe(map(this.userMapper.mapFrom));
-    }
-    getUserProfile(): Observable<UserModel>{
-        return this.http.get<UserEntity>('https://example.com/user').pipe(
-            map(this.userMapper.mapFrom));
+          .get<ContactEntity[]>('https://example.com/contacts/get')
+          .pipe(map(contactList => contactList.map(this.contactMapper.mapFrom)));
     }
 }
