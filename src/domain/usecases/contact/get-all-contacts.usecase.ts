@@ -1,5 +1,5 @@
 import { UseCase } from "@base/use-case";
-import { ContactModel } from "@domain/models/contact/contact.model";
+import { ContactModel } from "@domain/models/contact.models";
 import { ContactRepository } from "@domain/repositories/contact.repository";
 import { Observable } from "rxjs";
 

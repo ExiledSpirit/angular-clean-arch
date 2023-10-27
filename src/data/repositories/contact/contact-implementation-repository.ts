@@ -1,15 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ContactEntity } from "@data/repositories/user/entities/contact-entity";
-import { ContactImplementationRepositoryMapper } from "@data/repositories/user/mappers/contact-repository.mapper";
-import { ContactModel } from "@domain/models/contact/contact.model";
+import { ContactEntity } from "@data/repositories/contact/entities/contact-entity";
+import { ContactImplementationRepositoryMapper } from "@data/repositories/contact/mappers/contact-repository.mapper";
+import { ContactModel } from "@domain/models/contact.models";
 import { ContactRepository } from "@domain/repositories/contact.repository";
 import { Observable, map } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
 })
-export class NotificationImplementationRepository extends ContactRepository {
+export class ContactImplementationRepository extends ContactRepository {
     contactMapper = new ContactImplementationRepositoryMapper();
 
     constructor(private http: HttpClient) {
