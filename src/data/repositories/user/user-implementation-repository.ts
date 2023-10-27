@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ContactModel } from 'src/domain/models/contact/contact.model';
-import { ContactRepository } from 'src/domain/repositories/contact.repository';
-import { ContactEntity } from './entities/contact-entity';
-import { ContactImplementationRepositoryMapper } from './mappers/contact-repository.mapper';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { ContactEntity } from "@data/repositories/user/entities/contact-entity";
+import { ContactImplementationRepositoryMapper } from "@data/repositories/user/mappers/contact-repository.mapper";
+import { ContactModel } from "@domain/models/contact/contact.model";
+import { ContactRepository } from "@domain/repositories/contact.repository";
+import { Observable, map } from "rxjs";
 
 @Injectable({
     providedIn: 'root',

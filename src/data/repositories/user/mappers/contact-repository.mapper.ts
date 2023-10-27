@@ -1,6 +1,6 @@
-import { Mapper } from "src/base/mapper";
-import { ContactModel } from "src/domain/models/contact/contact.model";
-import { ContactEntity } from "../entities/contact-entity";
+import { Mapper } from "@base/mapper"
+import { ContactEntity } from "@data/repositories/user/entities/contact-entity"
+import { ContactModel } from "@domain/models/contact/contact.model"
 
 export class ContactImplementationRepositoryMapper extends Mapper<ContactEntity, ContactModel> {
   override mapFrom(param: ContactEntity): ContactModel {
