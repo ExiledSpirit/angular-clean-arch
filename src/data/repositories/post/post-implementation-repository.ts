@@ -22,7 +22,7 @@ export class PostImplementationRepository extends PostRepository {
       .pipe(map(this.postMapper.mapFrom))
   }
 
-  override findPostById(id: number): Observable<PostModel> {
+  override findPostById(id: string): Observable<PostModel> {
     return this.http
       .get<PostEntity>(`http://example.com/posts/${id}`)
       .pipe(map(this.postMapper.mapFrom))
