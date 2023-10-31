@@ -4,7 +4,7 @@ import { PostEntity } from "@data/repositories/post/entities/post-entity";
 import { PostImplementationRepositoryMapper } from "@data/repositories/post/mappers/post-repository-mapper";
 import { PostModel, WritePostBody } from "@domain/models/post.models";
 import { PostRepository } from "@domain/repositories/post.repository";
-import { Observable, map } from "rxjs";
+import { Observable, catchError, map, throwError } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -57,15 +57,25 @@ export class PostInMemoryRepository extends PostRepository {
   }
 
   override findPostById(id: string): Observable<PostModel> {
-    return new Observable((observer) => {
+    return new Observable<PostModel>((observer) => {
         const foundPost = this.postLists.find((post => post.id === id))
         if (!foundPost) throw new Error('Não Encontrado');
         observer.next(foundPost);
     })
+      .pipe(
+        catchError(() => {
+          return throwError(() => new Error('ID não encontrado'))
+        })
+      )
   }
 
   override getAllPosts(): Observable<PostModel[]> {
     console.log('teste');
-    return new Observable((observer) => observer.next(this.postLists));
+    return new Observable<PostModel[]>((observer) => observer.next(this.postLists))
+      .pipe(
+        catchError(() => {
+          return throwError(() => new Error('ID não encontrado'))
+        })
+      )
   }
 }
