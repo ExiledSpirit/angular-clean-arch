@@ -32,4 +32,4 @@ export const writePostUseCaseProvider: Provider = {
     writePostUseCaseProvider,
   ],
 })
-export class PostDataModule { }
+export class PostUsecasesModule { }

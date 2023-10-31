@@ -14,4 +14,4 @@ export const getAllContactsUseCaseProvider: Provider = {
     getAllContactsUseCaseProvider,
   ],
 })
-export class ContactDataModule { }
+export class ContactUsecasesModule { }
