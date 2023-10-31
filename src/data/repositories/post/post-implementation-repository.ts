@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { HttpService } from "@data/http-services/http-service.interface";
 import { PostEntity } from "@data/repositories/post/entities/post-entity";
 import { PostImplementationRepositoryMapper } from "@data/repositories/post/mappers/post-repository-mapper";
 import { PostModel, WritePostBody } from "@domain/models/post.models";
@@ -12,7 +12,7 @@ import { Observable, map } from "rxjs";
 export class PostImplementationRepository extends PostRepository {
   private postMapper = new PostImplementationRepositoryMapper();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpService) {
     super();
   }
 

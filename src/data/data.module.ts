@@ -1,15 +1,16 @@
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule, Provider } from "@angular/core";
+import { httpClientImplementation } from "@data/http-services/http-client.implementation";
+import { HttpService } from "@data/http-services/http-service.interface";
+import { PostImplementationRepository } from "@data/repositories/post/post-implementation-repository";
 import { ContactRepository } from "@domain/repositories/contact.repository";
-import { GetAllContactsUseCase } from "@domain/usecases/contact/get-all-contacts.usecase";
-import { ContactImplementationRepository } from "./repositories/contact/contact-implementation-repository";
 import { PostRepository } from "@domain/repositories/post.repository";
+import { GetAllContactsUseCase } from "@domain/usecases/contact/get-all-contacts.usecase";
 import { FindPostByIdUseCase } from "@domain/usecases/posts/find-post-by-id.usecase";
 import { GetAllPostsUseCase } from "@domain/usecases/posts/get-all-posts.usecase";
 import { WritePostUseCase } from "@domain/usecases/posts/write-post.usecase";
-import { PostImplementationRepository } from "./repositories/post/post-implementation-repository";
-import { PostInMemoryRepository } from "./repositories/post/post-in-memory-repository";
+import { ContactImplementationRepository } from "./repositories/contact/contact-implementation-repository";
 
 const getAllContactsUseCaseFactory = (contactRepo: ContactRepository) => new GetAllContactsUseCase(contactRepo);
 export const getAllContactsUseCaseProvider: Provider = {
@@ -51,7 +52,11 @@ export const writePostUseCaseProvider: Provider = {
     },
     {
       provide: PostRepository,
-      useExisting: PostInMemoryRepository
+      useExisting: PostImplementationRepository
+    },
+    {
+      provide: HttpService,
+      useExisting: httpClientImplementation
     }
   ],
   imports: [
