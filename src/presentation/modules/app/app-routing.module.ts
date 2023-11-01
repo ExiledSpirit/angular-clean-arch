@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('@presentation/modules/authorized/authorized.module').then((module) => module.AuthorizedModule)
+        loadChildren: () => import('@presentation/modules/unauthorized/unauthorized.module').then((module) => module.UnauthorizedModule)
       }
     ]
   }
